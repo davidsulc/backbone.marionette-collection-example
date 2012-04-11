@@ -5,3 +5,7 @@ MyApp.addRegions({
 });
 
 AngryCat = Backbone.Model.extend({});
+
+AngryCats = Backbone.Collection.extend({
+  model: AngryCat
+});
