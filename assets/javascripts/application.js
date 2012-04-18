@@ -34,3 +34,13 @@ MyApp.addInitializer(function(options){
   });
   MyApp.mainRegion.show(angryCatsView);
 });
+
+$(document).ready(function(){
+  var cats = new AngryCats([
+      new AngryCat({ name: 'Wet Cat' }),
+      new AngryCat({ name: 'Bitey Cat' }),
+      new AngryCat({ name: 'Surprised Cat' })
+  ]);
+
+  MyApp.start({cats: cats});
+});
