@@ -22,8 +22,10 @@
     <script type="text/template" id="angry_cats-template">
       <thead>
         <tr class='header'>
+          <th>Rank</th>
           <th>Name</th>
           <th>Image</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -31,8 +33,13 @@
     </script>
 
     <script type="text/template" id="angry_cat-template">
+      <td><%= rank %></td>
       <td><%= name %></td>
       <td><img class='angry_cat_pic' src='<%= image_path %>' /></td>
+      <td>
+        <div class='rank_up'><img id="rank_up" src='assets/images/up.gif' /></div>
+        <div class='rank_down'><img src='assets/images/down.gif' /></div>
+      </td>
     </script>
   </body>
 </html>
