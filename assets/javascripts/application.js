@@ -4,14 +4,18 @@ MyApp.addRegions({
   mainRegion: "#content"
 });
 
-AngryCat = Backbone.Model.extend({
-  defaults: {
-    rank: 0
-  }
-});
+AngryCat = Backbone.Model.extend({});
 
 AngryCats = Backbone.Collection.extend({
-  model: AngryCat
+  model: AngryCat,
+  
+  initialize: function(cats){
+    var rank = 1;
+    _.each(cats, function(cat) {
+      cat.set('rank', rank);
+      ++rank;
+    });
+  }
 });
 
 AngryCatView = Backbone.Marionette.ItemView.extend({
