@@ -15,6 +15,14 @@ AngryCats = Backbone.Collection.extend({
       cat.set('rank', rank);
       ++rank;
     });
+
+    MyApp.vent.on("rank:up", function(cat){
+      console.log("rank up");
+    });
+
+    MyApp.vent.on("rank:down", function(cat){
+      console.log("rank down");
+    });
   }
 });
 
@@ -29,11 +37,11 @@ AngryCatView = Backbone.Marionette.ItemView.extend({
   },
   
   rankUp: function(){
-    console.log("rank up");
+    MyApp.vent.trigger("rank:up", this.model);
   },
   
   rankDown: function(){
-    console.log("rank down");
+    MyApp.vent.trigger("rank:down", this.model);
   }
 });
 
