@@ -23,6 +23,10 @@ AngryCats = Backbone.Collection.extend({
     MyApp.vent.on("rank:down", function(cat){
       console.log("rank down");
     });
+  },
+
+  comparator: function(cat) {
+    return cat.get('rank');
   }
 });
 
