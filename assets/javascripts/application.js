@@ -4,7 +4,15 @@ MyApp.addRegions({
   mainRegion: "#content"
 });
 
-AngryCat = Backbone.Model.extend({});
+AngryCat = Backbone.Model.extend({
+  rankUp: function() {
+    this.set({rank: this.get('rank') - 1});
+  },
+  
+  rankDown: function() {
+    this.set({rank: this.get('rank') + 1});
+  }
+});
 
 AngryCats = Backbone.Collection.extend({
   model: AngryCat,
@@ -15,18 +23,50 @@ AngryCats = Backbone.Collection.extend({
       cat.set('rank', rank);
       ++rank;
     });
+    
+    var self = this;
 
     MyApp.vent.on("rank:up", function(cat){
-      console.log("rank up");
+      if (cat.get('rank') == 1) {
+        // can't increase rank of top-ranked cat
+        return true;
+      }
+      self.rankUp(cat);
+      self.sort();
     });
 
     MyApp.vent.on("rank:down", function(cat){
-      console.log("rank down");
+      if (cat.get('rank') == self.size()) {
+        // can't decrease rank of lowest ranked cat
+        return true;
+      }
+      self.rankDown(cat);
+      self.sort();
     });
   },
 
   comparator: function(cat) {
     return cat.get('rank');
+  },
+  
+  rankUp: function(cat) {
+    // find the cat we're going to swap ranks with
+    var rankToSwap = cat.get('rank') - 1;
+    var otherCat = this.at(rankToSwap - 1);
+    
+    // swap ranks
+    cat.rankUp();
+    otherCat.rankDown();
+  },
+  
+  rankDown: function(cat) {
+    // find the cat we're going to swap ranks with
+    var rankToSwap = cat.get('rank') + 1;
+    var otherCat = this.at(rankToSwap - 1);
+    
+    // swap ranks
+    cat.rankDown();
+    otherCat.rankUp();
   }
 });
 
