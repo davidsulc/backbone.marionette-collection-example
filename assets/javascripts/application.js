@@ -59,6 +59,16 @@ AngryCats = Backbone.Collection.extend({
       self.rankDown(cat);
       self.sort();
     });
+    
+    MyApp.vent.on("cat:disqualify", function(cat){
+      var disqualifiedRank = cat.get('rank');
+      var catsToUprank = self.filter(
+        function(cat){ return cat.get('rank') > disqualifiedRank; }
+      );
+      catsToUprank.forEach(function(cat){
+        cat.rankUp();
+      });
+    });
   },
 
   comparator: function(cat) {
@@ -112,6 +122,7 @@ AngryCatView = Backbone.Marionette.ItemView.extend({
   },
   
   disqualify: function(){
+    MyApp.vent.trigger("cat:disqualify", this.model);
     this.model.destroy();
   }
 });
