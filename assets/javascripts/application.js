@@ -68,6 +68,7 @@ AngryCats = Backbone.Collection.extend({
       catsToUprank.forEach(function(cat){
         cat.rankUp();
       });
+      self.trigger('reset');
     });
   },
 
