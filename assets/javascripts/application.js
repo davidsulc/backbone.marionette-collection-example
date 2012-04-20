@@ -93,7 +93,8 @@ AngryCatView = Backbone.Marionette.ItemView.extend({
   
   events: {
     'click .rank_up img': 'rankUp',
-    'click .rank_down img': 'rankDown'
+    'click .rank_down img': 'rankDown',
+    'click a.disqualify': 'disqualify'
   },
   
   initialize: function(){
@@ -108,6 +109,10 @@ AngryCatView = Backbone.Marionette.ItemView.extend({
   rankDown: function(){
     this.model.addVote();
     MyApp.vent.trigger("rank:down", this.model);
+  },
+  
+  disqualify: function(){
+    this.model.destroy();
   }
 });
 
