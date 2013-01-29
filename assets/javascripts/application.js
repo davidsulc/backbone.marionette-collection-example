@@ -109,7 +109,7 @@ AngryCatView = Backbone.Marionette.ItemView.extend({
   },
   
   initialize: function(){
-    this.bindTo(this.model, "change:votes", this.render);
+    this.listenTo(this.model, "change:votes", this.render);
   },
   
   rankUp: function(){
