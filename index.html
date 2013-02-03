@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>BACKBONE Marionette Tutorial: Collections</title>
+
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/json2/20110223/json2.js"></script>
+    <script src="./assets/javascripts/vendor/underscore.js"></script>
+    <script src="./assets/javascripts/vendor/backbone.js"></script>
+    <script src="./assets/javascripts/vendor/backbone.marionette.js"></script>
+
+    <link href="./assets/css/bootstrap.css" rel="stylesheet">
+    <link href="./assets/css/custom.css" rel="stylesheet">
+
+    <script src="./assets/javascripts/application.js"></script>
+  </head>
+  <body>
+    <div id="content">
+    </div>
+
+    <script type="text/template" id="angry_cats-template">
+      <thead>
+        <tr class='header'>
+          <th>Rank</th>
+          <th>Votes</th>
+          <th>Name</th>
+          <th>Image</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </script>
+
+    <script type="text/template" id="angry_cat-template">
+      <td><%= rank %></td>
+      <td><%= votes %></td>
+      <td><%= name %></td>
+      <td><img class='angry_cat_pic' src='<%= image_path %>' /></td>
+      <td>
+        <div class='rank_up'><img src='assets/images/up.gif' /></div>
+        <div class='rank_down'><img src='assets/images/down.gif' /></div>
+      </td>
+      <td><a href="#" class="disqualify">Disqualify</a></td>
+    </script>
+  </body>
+</html>
