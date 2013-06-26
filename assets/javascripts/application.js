@@ -42,25 +42,27 @@ AngryCats = Backbone.Collection.extend({
     
     var self = this;
 
-    MyApp.vent.on("rank:up", function(cat){
-      if (cat.get('rank') == 1) {
+    MyApp.on("rank:up", function(cat){
+      if (cat.get('rank') === 1) {
         // can't increase rank of top-ranked cat
         return true;
       }
       self.rankUp(cat);
       self.sort();
+      self.trigger("reset");
     });
 
-    MyApp.vent.on("rank:down", function(cat){
-      if (cat.get('rank') == self.size()) {
+    MyApp.on("rank:down", function(cat){
+      if (cat.get('rank') === self.size()) {
         // can't decrease rank of lowest ranked cat
         return true;
       }
       self.rankDown(cat);
       self.sort();
+      self.trigger("reset");
     });
     
-    MyApp.vent.on("cat:disqualify", function(cat){
+    MyApp.on("cat:disqualify", function(cat){
       var disqualifiedRank = cat.get('rank');
       var catsToUprank = self.filter(
         function(cat){ return cat.get('rank') > disqualifiedRank; }
@@ -114,16 +116,16 @@ AngryCatView = Backbone.Marionette.ItemView.extend({
   
   rankUp: function(){
     this.model.addVote();
-    MyApp.vent.trigger("rank:up", this.model);
+    MyApp.trigger("rank:up", this.model);
   },
   
   rankDown: function(){
     this.model.addVote();
-    MyApp.vent.trigger("rank:down", this.model);
+    MyApp.trigger("rank:down", this.model);
   },
   
   disqualify: function(){
-    MyApp.vent.trigger("cat:disqualify", this.model);
+    MyApp.trigger("cat:disqualify", this.model);
     this.model.destroy();
   }
 });
