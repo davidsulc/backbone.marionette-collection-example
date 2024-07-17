@@ -1,7 +1,7 @@
 Backbone.Marionette Collection Example
 ======================================
 
-This is a simple application reimplemented to use Backbone.Marionette and serve as a tutorial. The end result can be seen at [http://davidsulc.github.com/backbone.marionette-collection-example/](http://davidsulc.github.com/backbone.marionette-collection-example/)
+This is a simple application reimplemented to use Backbone.Marionette and serve as a tutorial. The end result can be seen at [http://davidsulc.github.io/backbone.marionette-collection-example/](http://davidsulc.github.io/backbone.marionette-collection-example/)
 
 The application development is covered by 2 blog posts:
 
